@@ -1,0 +1,66 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+group = 'com.codegym'
+version = '1.0-SNAPSHOT'
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Servlet API
+    providedCompile 'javax.servlet:javax.servlet-api:4.0.1'
+
+    // Spring MVC
+    implementation 'org.springframework:spring-webmvc:5.3.23'
+    implementation 'org.springframework:spring-context:5.3.23'
+
+    // JSTL
+    implementation 'javax.servlet:jstl:1.2'
+
+    // Logging
+    implementation 'org.slf4j:slf4j-api:1.7.36'
+    implementation 'org.slf4j:slf4j-simple:1.7.36'
+
+    // Testing
+    testImplementation 'junit:junit:4.13.2'
+}
+
+// Optional: Define war archive name
+war {
+    archiveFileName = 'customer-management.war'
+}
+
+// Optional: Set main class for execution (not needed for web app)
+// application {
+//     mainClassName = 'com.codegym.YourMainClass'
+// }
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+// Ensure web resources are included in WAR
+sourceSets {
+    main {
+        resources {
+            srcDirs = ['src/main/resources', 'src/main/webapp']
+        }
+    }
+}
+
+distributions {
+    main {
+        contents {
+            from('src/main/webapp') {
+                into 'webapp'
+            }
+        }
+    }
+}
