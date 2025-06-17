@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><!DOCTYPE html>
+        <html xmlns:th="http://www.thymeleaf.org">
+        <head>
+        <title>Danh sách sản phẩm</title>
+    <style>
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid black; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        a { margin-right: 10px; }
+    </style>
+</head>
+<body>
+<h2>Danh sách sản phẩm</h2>
+<a th:href="@{/products/create}">Thêm sản phẩm mới</a>
+<form th:action="@{/products/search}" method="get">
+    <input type="text" name="name" placeholder="Tìm kiếm theo tên"/>
+    <button type="submit">Tìm kiếm</button>
+</form>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Tên</th>
+        <th>Giá</th>
+        <th>Mô tả</th>
+        <th>Nhà sản xuất</th>
+        <th>Hành động</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product : ${products}">
+        <td th:text="${product.id}"></td>
+        <td th:text="${product.name}"></td>
+        <td th:text="${product.price}"></td>
+        <td th:text="${product.description}"></td>
+        <td th:text="${product.manufacturer}"></td>
+        <td>
+            <a th:href="@{/products/view/{id}(id=${product.id})}">Xem</a>
+            <a th:href="@{/products/edit/{id}(id=${product.id})}">Sửa</a>
+            <a th:href="@{/products/delete/{id}(id=${product.id})}">Xóa</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html></title>
+</head>
+<body>
+
+</body>
+</html>
